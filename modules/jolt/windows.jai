@@ -2488,10 +2488,14 @@ JPH_EstimateCollisionResponse :: (body1: *JPH_Body, body2: *JPH_Body, manifold: 
 
 joltc :: #library,no_dll "windows/joltc";
 
-jolt :: #library,no_dll,link_always "windows/Jolt";
-a    :: #library,system,link_always "ucrtd";
-b    :: #library,system,link_always "msvcmrtd";
-c    :: #library,system,link_always "libcpmtd";
+// TODO: These libs are required to build the static debug version of joltc.
+// Have a compile check to do the loads only in that case.
+// TODO: I tried to have them in the module.jai but I have link error
+// for some reason it only works here?
+jolt     :: #library,no_dll,link_always "windows/Jolt";
+ucrtd    :: #library,system,link_always "ucrtd";
+msvcmrtd :: #library,system,link_always "msvcmrtd";
+libcpmtd :: #library,system,link_always "libcpmtd";
 
 #run {
     {
